@@ -183,28 +183,21 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#" aria-expanded="false" aria-controls="ui-basic">
+                    <a class="nav-link" href="{{ route('cp.users.index') }}">
                         <i class="menu-icon fas fa-users-cog"></i>
                         <span class="menu-title">User Management</span>
                     </a>
-                    <div class="collapse" id="ui-basic">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('cp.users.index') }}">Users</a>
-                            </li>
-                        </ul>
-                    </div>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('cp.index') }}">
+                    <a class="nav-link" href="{{ route('cp.roles.index') }}">
                         <i class="menu-icon fas fa-star-half-alt"></i>
                         <span class="menu-title">Role Management</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('cp.index') }}">
+                    <a class="nav-link" href="{{ route('cp.categories.index') }}">
                         <i class="menu-icon fab fa-wpforms"></i>
                         <span class="menu-title">Forum Management</span>
                     </a>

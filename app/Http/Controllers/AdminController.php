@@ -23,7 +23,7 @@ class AdminController extends Controller
 
     public function userIndex()
     {
-        $users = User::orderBy('id', 'desc')
+        $users = User::orderBy('id', 'asc')
             ->with('roles')
             ->paginate();
         return view('admin.users.index', compact('users'));
@@ -128,8 +128,22 @@ class AdminController extends Controller
         return redirect()->back();
     }
 
-    public function deleteCategory()
+    public function deleteCategory(Category $category)
     {
+        $category->delete();
+        \activity()->causedBy(Auth::id())->log('Delete the categorie: '. $category->name);
+        Session::flash('notification', ['type' => 'success-message', 'message' => "De categorie {$category->name} is verwijderd!"]);
 
+        return redirect()->back();
+    }
+
+    public function editCategory(Category $category, Request $request)
+    {
+        $category->update([
+            'name' => $request->name
+        ]);
+
+        Session::flash('notification', ['type' => 'success-message', 'message' => "De categorie {$category->name} is aangepast!"]);
+        return redirect()->back();
     }
 }

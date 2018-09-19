@@ -43,7 +43,7 @@
                                 </td>
                                 <td>
                                     @foreach($user->roles as $roles)
-                                        <label class="badge badge-warning">{{ $roles->name }}</label>
+                                        <label class="badge badge-{{ $roles->label_type }}">{{ $roles->name }}</label>
                                     @endforeach
                                 </td>
                                 <td>

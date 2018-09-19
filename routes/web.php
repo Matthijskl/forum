@@ -50,6 +50,8 @@ Route::group(['middleware' => 'auth'], function() {
                Route::get('/', ['as' => 'index', 'uses' => 'AdminController@categoryIndex']);
                Route::post('/create', ['as' => 'create', 'uses' => 'AdminController@createCategory']);
                Route::post('/sub/create', ['as' => 'sub.create', 'uses' => 'AdminController@createSubCategory']);
+               Route::post('/{category}/delete', ['as' => 'delete', 'uses' => 'AdminController@deleteCategory']);
+               Route::post('/{category}/edit', ['as' => 'edit', 'uses' => 'AdminController@editCategory']);
             });
         });
     });

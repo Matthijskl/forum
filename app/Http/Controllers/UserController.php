@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Http\Requests\EditUserRequest;
 use App\Role;
 use App\User;
@@ -13,7 +14,8 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $role = Role::all();
-        return view('admin.users.edit', compact('user', 'role'));
+//        $categories = Category::where('user_id', $user->id)->paginate(10);
+        return view('admin.users.edit', compact('user', 'role', 'categories'));
     }
 
     public function update(User $user, EditUserRequest $request)

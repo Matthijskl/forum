@@ -30,13 +30,35 @@
                                         </select>
                                     </div>
                         </div>
-
-
-
                         <button type="submit" class="btn btn-success mr-2" id="button-password-change">{{ trans('admin.buttons.update') }}</button>
                     </form>
                 </div>
             </div>
         </div>
+
+        <div class="row flex-grow">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">
+                            {{ trans('admin.users.edit.card_catagories_title') }}
+                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Created_at</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 @endsection
