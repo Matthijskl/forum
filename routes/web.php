@@ -25,6 +25,8 @@ Route::group(['middleware' => 'auth'], function() {
             // UserManagement Related
             Route::group(['prefix' => 'users', 'as' => 'users.'], function() {
                 Route::get('/', ['as' => 'index', 'uses' => 'AdminController@userIndex']);
+                Route::get('/{user}', ['as' => 'edit', 'uses' => 'UserController@edit']);
+                Route::post('/{user}/update', ['as' => 'update', 'uses' => 'UserController@update']);
             });
 
             // User Related
@@ -33,6 +35,21 @@ Route::group(['middleware' => 'auth'], function() {
                Route::post('/password/save', ['as' => 'password.save', 'uses' => 'AdminController@changePassword']);
                Route::post('/username/save', ['as' => 'username.save', 'uses' => 'AdminController@changeUsername']);
                Route::post('/email/save', ['as' => 'email.save', 'uses' => 'AdminController@changeEmail']);
+            });
+
+            // Roles related
+
+            Route::group(['prefix' => 'roles', 'as' => 'roles.'], function() {
+               Route::get('/', ['as' => 'index', 'uses' => 'AdminController@roleIndex']);
+               Route::post('/', ['as' => 'add', 'uses' => 'AdminController@addRole']);
+               Route::post('/{role}/delete', ['as' => 'delete', 'uses' => 'AdminController@deleteRole']);
+            });
+
+            // Category related
+            Route::group(['prefix' => 'categories', 'as' => 'categories.'], function() {
+               Route::get('/', ['as' => 'index', 'uses' => 'AdminController@categoryIndex']);
+               Route::post('/create', ['as' => 'create', 'uses' => 'AdminController@createCategory']);
+               Route::post('/sub/create', ['as' => 'sub.create', 'uses' => 'AdminController@createSubCategory']);
             });
         });
     });

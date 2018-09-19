@@ -36,7 +36,7 @@
                                     <img src="../../images/faces-clipart/pic-1.png" alt="image">
                                 </td>
                                 <td>
-                                    {{ $user->name }}
+                                    <a href="{{ route('cp.users.edit', ['id' => $user->id]) }}">{{ $user->name }}</a>
                                 </td>
                                 <td>
                                     {{ $user->email }}

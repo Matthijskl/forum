@@ -61,11 +61,11 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                         <i class="fab fa-wpforms"></i>
-                        <span class="count">7</span>
+                        <span class="count">{{ $activities->count() }}</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
                         <div class="dropdown-item">
-                            <p class="mb-0 font-weight-normal float-left">You have 7 unread mails
+                            <p class="mb-0 font-weight-normal float-left">You have {{ $activities->count() }} unread activities
                             </p>
                             <span class="badge badge-info badge-pill float-right">View all</span>
                         </div>
@@ -118,7 +118,7 @@
                 </li>
                 <li class="nav-item dropdown d-none d-xl-inline-block">
                     <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                        <span class="profile-text">Hello, {{ Auth::user()->name }} !</span>
+                        <span class="profile-text">Hello, {{ Auth::user()->name   }} !</span>
                         <img class="img-xs rounded-circle" src="http://www.bootstrapdash.com/demo/star-admin-free/jquery//images/faces/face1.jpg" alt="Profile image">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
@@ -195,10 +195,29 @@
                         </ul>
                     </div>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('cp.index') }}">
+                        <i class="menu-icon fas fa-star-half-alt"></i>
+                        <span class="menu-title">Role Management</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('cp.index') }}">
+                        <i class="menu-icon fab fa-wpforms"></i>
+                        <span class="menu-title">Forum Management</span>
+                    </a>
+                </li>
             </ul>
         </nav>
         <div class="main-panel">
             <div class="content-wrapper">
+                @if(Session::has('notification'))
+                    <script>
+                        showSwal('{{Session::get('notification.type') }}', '{{ Session::get('notification.message') }}');
+                    </script>
+                @endif
                 @yield('content')
             </div>
         </div>

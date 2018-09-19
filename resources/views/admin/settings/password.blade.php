@@ -1,11 +1,6 @@
 @extends('admin.base')
 
 @section('content')
-    @if(Session::has('notification'))
-        <script>
-            showSwal('{{Session::get('notification.type') }}', '{{ Session::get('notification.message') }}');
-        </script>
-    @endif
     <div class="row">
     <div class="col-md-6">
         <div class="card">

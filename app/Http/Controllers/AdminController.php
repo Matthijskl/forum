@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
+use App\Http\Requests\AddRoleRequest;
 use App\Http\Requests\ChangePasswordRequest;
 use App\Http\Requests\ChangeUsernameRequest;
+use App\Http\Requests\CreateCategoryRequest;
+use App\Http\Requests\CreateSubCategoryRequest;
+use App\Role;
 use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +23,9 @@ class AdminController extends Controller
 
     public function userIndex()
     {
-        $users = User::orderBy('id', 'desc')->paginate();
+        $users = User::orderBy('id', 'desc')
+            ->with('roles')
+            ->paginate();
         return view('admin.users.index', compact('users'));
     }
 
@@ -61,5 +68,68 @@ class AdminController extends Controller
         Session::flash('notification', ['type' => 'success-message', 'message' => 'Succesvol jouw email adres veranderd!']);
 
         return redirect()->back();
+    }
+
+    public function roleIndex()
+    {
+        $roles = Role::all();
+        return view('admin.roles.index', compact('roles'));
+    }
+
+    public function addRole(AddRoleRequest $request)
+    {
+        Role::create($request->all());
+        \activity()->causedBy($request->user()->id)->log('Added a role: '. $request->name);
+        Session::flash('notification', ['type' => 'success-message', 'message' => 'Succesvol een extra Role toegevoegd!!']);
+
+        return redirect()->back();
+    }
+
+    public function deleteRole(Role $role)
+    {
+//        dd($role);
+        $role->delete();
+        \activity()->causedBy(Auth::id())->log('Delete the role: '. $role->name);
+        Session::flash('notification', ['type' => 'success-message', 'message' => "De rol {$role->name} is verwijderd!"]);
+
+        return redirect()->back();
+    }
+
+    public function categoryIndex()
+    {
+        $categories = Category::firstCategory()->get();
+        return view('admin.categories.index', compact('categories'));
+    }
+
+    public function createCategory(CreateCategoryRequest $request)
+    {
+        Category::create([
+            'name' => $request->name,
+            'description' => $request->description
+        ]);
+
+        \activity()->causedBy(Auth::id())->log('Created the new category: '. $request->name);
+        Session::flash('notification', ['type' => 'success-message', 'message' => "Succesvol de categorie {$request->name} aangemaakt!"]);
+
+        return redirect()->back();
+    }
+
+    public function createSubCategory(CreateSubCategoryRequest $request)
+    {
+        Category::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'parent_id' => $request->parent_id
+        ]);
+
+        \activity()->causedBy(Auth::id())->log('Created the new sub-category: '. $request->name);
+        Session::flash('notification', ['type' => 'success-message', 'message' => "Succesvol de sub-categorie {$request->name} aangemaakt!"]);
+
+        return redirect()->back();
+    }
+
+    public function deleteCategory()
+    {
+
     }
 }

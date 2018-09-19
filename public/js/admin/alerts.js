@@ -54,8 +54,8 @@
             )
         } else if (type === 'warning-message-and-cancel') {
             swal({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
+                title: 'Weet je het zeker?',
+                text: "",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3f51b5',
