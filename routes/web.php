@@ -15,7 +15,10 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'auth'], function() {
     Route::group(['prefix' => 'threads', 'as' => 'threads.'], function() {
        Route::get('{category}', ['as' => 'list', 'uses' => 'ThreadController@show']);
-       Route::get('{thread}', ['as' => 'show', 'uses' => 'ThreadController@thread']);
+        Route::post('{category}/create', ['as' => 'create', 'uses' => 'ThreadController@create']);
+       Route::get('thread/{thread}', ['as' => 'show', 'uses' => 'ThreadController@thread']);
+       Route::post('thread/{thread}/comment', ['as' => 'comment', 'uses' => 'ThreadController@comment']);
+
     });
 
     Route::group(['prefix' => 'cp', 'as' => 'cp.'], function() {

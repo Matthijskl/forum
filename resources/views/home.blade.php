@@ -29,6 +29,13 @@
             <div class="card">
                 <div class="card-header">Laatst actieve berichten</div>
                 <div class="card-body">
+                    @foreach($comment as $comments)
+                        <a href="{{ route('threads.show', ['id' => $comments->threads->id]) }}">{{ $comments->threads->name }}</a>
+                            <br><small>{{ $comments->body }}</small>
+                        <div class="mt-1"></div>
+                        <small class="text-muted">Door: {{ $comments->user->name }}</small>
+                        <hr>
+                    @endforeach
                 </div>
             </div>
         </div>

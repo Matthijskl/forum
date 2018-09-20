@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use App\Comment;
 
 class HomeController extends Controller
 {
@@ -27,6 +28,7 @@ class HomeController extends Controller
         $categories = Category::firstCategory()
             ->with('subCategories')
             ->get();
-        return view('home', compact('categories'));
+        $comment = Comment::orderBy('id')->limit(8)->get();
+        return view('home', compact('categories', 'comment'));
     }
 }

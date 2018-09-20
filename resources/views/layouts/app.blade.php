@@ -73,6 +73,17 @@
         </nav>
 
         <main class="py-4">
+            <div class="container">
+                <ol class="breadcrumb">
+                    <small class="text-muted">
+                        @foreach(Request::segments() as $route)
+                            <li class="d-inline-block breadcrumb-item text-capitalize">
+                                <a href="{{Request::url()}}">{{$route}}</a>
+                            </li>
+                        @endforeach
+                    </small>
+                </ol>
+            </div>
             @yield('content')
         </main>
     </div>

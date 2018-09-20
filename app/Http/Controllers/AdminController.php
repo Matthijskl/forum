@@ -48,11 +48,20 @@ class AdminController extends Controller
 
     public function changeUsername(ChangeUsernameRequest $request)
     {
+        if(!$request->hasFile('picture'))
+        {
+            return Auth::user()->picture;
+        }
+
+        $fileName = $request->picture->getClientOriginalExtension();
+        $request->picture->move(storage_path('files'), $fileName);
+
         Auth::user()->update([
-            'name' => $request->username
+            'name' => $request->username,
+            'picture' => $request->picture
         ]);
 
-        \activity()->causedBy($request->user()->id)->log('Changed his name into '. $request->username);
+        \activity()->causedBy($request->user()->id)->log('Changed his photo or name settings');
         Session::flash('notification', ['type' => 'success-message', 'message' => 'Succesvol jouw gebruikersnaam veranderd!']);
 
         return redirect()->back();
