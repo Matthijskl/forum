@@ -107,6 +107,7 @@ class AdminController extends Controller
     public function categoryIndex()
     {
         $categories = Category::firstCategory()->get();
+//        $subCategory = Category::where('')->get();
         return view('admin.categories.index', compact('categories'));
     }
 

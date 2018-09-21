@@ -45,4 +45,32 @@ class ThreadController extends Controller
 
         return redirect()->back();
     }
+
+    public function close(Thread $thread)
+    {
+        if(!PermissionHelper::has('can_lock_threads'))
+        {
+            return;
+        }
+
+        $thread = Thread::where('id', $thread->id);
+        $thread->update([
+            'locked' => 1
+        ]);
+        return redirect()->back();
+    }
+
+    public function unlock(Thread $thread)
+    {
+        if(!PermissionHelper::has('can_unlock_threads'))
+        {
+            return;
+        }
+
+        $thread = Thread::where('id', $thread->id);
+        $thread->update([
+            'locked' => 0
+        ]);
+        return redirect()->back();
+    }
 }

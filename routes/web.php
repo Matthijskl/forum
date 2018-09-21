@@ -18,6 +18,8 @@ Route::group(['middleware' => 'auth'], function() {
         Route::post('{category}/create', ['as' => 'create', 'uses' => 'ThreadController@create']);
        Route::get('thread/{thread}', ['as' => 'show', 'uses' => 'ThreadController@thread']);
        Route::post('thread/{thread}/comment', ['as' => 'comment', 'uses' => 'ThreadController@comment']);
+       Route::post('/thread/{thread}/close', ['as' => 'close', 'uses' => 'ThreadController@close']);
+        Route::post('/thread/{thread}/unlock', ['as' => 'unlock', 'uses' => 'ThreadController@unlock']);
 
     });
 

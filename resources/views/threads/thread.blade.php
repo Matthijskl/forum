@@ -5,19 +5,45 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ $thread->name }}</div>
+                    <div class="card-header">
+                        {{ $thread->name }}
+
+                        <div class="float-right">
+                            @if(\App\Helpers\PermissionHelper::has('can_lock_threads') && $thread->locked == 0)
+                                <form method="post" action="{{ route('threads.close', ['id' => $thread->id]) }}">
+                                    @csrf
+                                    <button class="btn btn-danger">Lock thread</button>
+                                </form>
+                            @endif
+
+                            @if($thread->locked == 1)
+                                    <i class="fas fa-lock"></i>
+                                @if(\App\Helpers\PermissionHelper::has('can_unlock_threads'))
+                                        <form method="post" action="{{ route('threads.unlock', ['id' => $thread->id]) }}">
+                                            @csrf
+                                            <button class="btn btn-danger">Unlock thread</button>
+                                        </form>
+                                @endif
+                            @endif
+                        </div>
+                    </div>
                     <div class="card-body">
+                        @if(!$thread->locked == 1)
                         <form method="post" action="{{ route('threads.comment', ['id' => $thread->id]) }}">
                             {{ csrf_field() }}
                             <div class="form-group">
-                                <input type="text" name="body" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}">
+                                <textarea name="body"></textarea>
                             </div>
                             <button class="btn btn-success float-right">Comment</button>
                         </form>
+                            @endif
                     </div>
                 </div>
             </div>
         </div>
+        @if($thread->locked == 1)
+
+        @else
             @foreach($comments as $comment)
             <div class="row justify-content-center mt-4">
 
@@ -32,7 +58,7 @@
                             </div>
                         </div>
                         <div style="text-indent: 10px;">
-                           {{ $comment->body }}
+                           {!!html_entity_decode($comment->body) !!}
                         </div>
 
                     </div>
@@ -40,5 +66,7 @@
             </div>
             </div>
             @endforeach
+        @endif
     </div>
+
 @endsection

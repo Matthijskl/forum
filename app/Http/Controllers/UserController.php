@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Http\Requests\EditUserRequest;
+use App\Mail\SendTestMail;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -27,9 +30,14 @@ class UserController extends Controller
             'email' => $request->email,
         ]);
 
+
         $user->roles()->sync($request->role);
         \activity()->causedBy($request->user()->id)->log('Edited '.$user->name.'`s profile');
         Session::flash('notification', ['type' => 'success-message', 'message' => "Succesvol {$user->name} geupdate!"]);
+
+        $email = new SendTestMail($user);
+
+        Mail::to($user)->queue($email);
         return redirect()->back();
     }
 }

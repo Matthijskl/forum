@@ -11,6 +11,10 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/trix.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+    <script>tinymce.init({ selector:'textarea' });</script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -19,9 +23,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/trix.css') }}">
 </head>
 <body>
     <div id="app">
+        <div style="height: 200px; width:100%;background: url('http://metromidsayap-water.gov.ph/wp-content/uploads/2016/11/Header-Background.jpg');"></div>
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -78,7 +84,7 @@
                     <small class="text-muted">
                         @foreach(Request::segments() as $route)
                             <li class="d-inline-block breadcrumb-item text-capitalize">
-                                <a href="{{Request::url()}}">{{$route}}</a>
+                                <a href="{{ $route }}">{{$route}}</a>
                             </li>
                         @endforeach
                     </small>

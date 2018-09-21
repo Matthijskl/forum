@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Forum - AdminCP</title>
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/trix.css') }}">
     <link rel="stylesheet" href="http://www.bootstrapdash.com/demo/star-admin-free/jquery/vendors/css/vendor.bundle.base.css">
     <link rel="stylesheet" href="http://www.bootstrapdash.com/demo/star-admin-free/jquery/vendors/css/vendor.bundle.addons.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
@@ -20,9 +21,17 @@
     <script src="http://www.bootstrapdash.com/demo/star-admin-free/jquery/js/misc.js"></script>
     <script src="https://www.bootstrapdash.com/demo/star-admin-pro/src/assets/js/shared/desktop-notification.js"></script>
     <script src="https://www.bootstrapdash.com/demo/star-admin-pro/src/assets/js/shared/toastDemo.js"></script>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.7.5/js/bootstrap-select.min.js"></script>
+    <script src="https://rawgit.com/DashboardCode/BsMultiSelect/master/dist/js/BsMultiSelect.min.js"></script>
     <script src="{{ asset('js/admin/dashboard.js') }}"></script>
     <script src="{{ asset('js/admin/alerts.js') }}"></script>
     <script src="{{ asset('js/admin/request.js') }}"></script>
+    <script src="{{ asset('js/trix.js') }}"></script>
+
 
     <link rel="shortcut icon" href="images/favicon.png" />
 </head>
@@ -216,4 +225,6 @@
         </div>
     </div>
 </div>
+
+
 

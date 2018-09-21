@@ -9,9 +9,10 @@
                         {{ trans('admin.categories.table.title') }}
                         <div class="float-right"><button class="btn btn-success" data-toggle="modal" data-target="#create-new-categories">Maak een nieuwe categorie</button></div>
                     </div>
-                    <table class="table">
+                    <table class="table" id="dragRows">
                         <thead>
                             <tr>
+                                <th>OrderNum</th>
                                 <th>Category</th>
                                 <th>Created at</th>
                             </tr>
@@ -19,17 +20,26 @@
                         <tbody>
                         @foreach($categories as $category)
                             <tr>
+                                <td></td>
                                 <td>{{ $category->name }}</td>
                                 <td>{{ $category->created_at }}
                                     <div class="float-right">
                                         <form method="post" action="{{ route('cp.categories.delete', ['id' => $category->id]) }}">
                                             {{ csrf_field() }}
-                                            <button class="btn btn-danger">Delete</button>
+                                            <button class="btn btn-danger float-right">Delete</button>
                                         </form>
                                     </div>
                                     <div class="float-right"><button class="btn btn-info" data-toggle="modal" data-target="#edit-category">Edit</button>&nbsp;</div>
                                 </td>
                             </tr>
+
+                            @foreach($category->subCategories->sortBy('order') as $sub)
+                                <tr class="table-secondary">
+                                    <td class="index">{{ $sub->order }}</td>
+                                    <td id="idFromRow">{{ $sub->name }}</td>
+                                    <td>{{ $sub->created_at }}</td>
+                                </tr>
+                            @endforeach
                             <!-- Modal -->
                             <div class="modal fade" id="edit-category" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog" role="document">
@@ -52,7 +62,9 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>    <script src="{{ asset('js/admin/dashboard.js') }}"></script>
+                            <script src="{{ asset('js/admin/alerts.js') }}"></script>
+                            <script src="{{ asset('js/admin/request.js') }}"></script>
                         @endforeach
                         </tbody>
                     </table>
@@ -64,7 +76,6 @@
 
 
     @include('admin.categories.partials.createcategory')
-
     <script>
 
             $('#requestSelect').change(function() {
@@ -76,9 +87,29 @@
                     $('#create-category').hide();
                     $('#create-sub-category').show();
                 }
-
-
             })
+
+            // var fixHelperModified = function(e, tr) {
+            //         var $originals = tr.children();
+            //         var $helper = tr.clone();
+            //         $helper.children().each(function(index) {
+            //             $(this).width($originals.eq(index).width())
+            //         });
+            //         return $helper;
+            //     },
+            //
+            //     updateIndex = function(e, ui) {
+            //         $('td.index', ui.item.parent()).each(function (i) {
+            //             $(this).html(i + 1);
+            //         });
+            //     };
+            //
+            // $("#dragRows tbody").sortable({
+            //     helper: fixHelperModified,
+            //     stop: updateIndex
+            // }).disableSelection();
+
+
 
     </script>
 @endsection

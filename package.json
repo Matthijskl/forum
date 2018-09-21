@@ -18,5 +18,12 @@
         "lodash": "^4.17.5",
         "popper.js": "^1.12",
         "vue": "^2.5.7"
+    },
+    "dependencies": {
+        "@dashboardcode/bsmultiselect": "^0.2.17",
+        "npm": "^6.4.1",
+        "trix": "basecamp/trix",
+        "vue-multiselect": "^2.1.0",
+        "vuejs": "^3.0.1"
     }
 }

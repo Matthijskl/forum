@@ -17,7 +17,7 @@
                         <small class="text-muted"><br>
                             <i class="far fa-comments" style="color: deepskyblue;"></i> 12 &nbsp;
                             <i class="far fa-heart" style="color: red;"></i> 12 &nbsp;
-                            <i class="fab fa-wpforms" style="color: limegreen;"></i> {{ $subCategory->count() }}
+                            <i class="fab fa-wpforms" style="color: limegreen;"></i> 11
                         </small>
                         @endforeach
                     </div>
